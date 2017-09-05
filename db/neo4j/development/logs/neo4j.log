@@ -1,0 +1,9 @@
+2017-08-31 19:18:36.368+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-08-31 19:18:36.524+0000 INFO  Starting...
+2017-08-31 19:18:39.450+0000 INFO  Bolt enabled on localhost:7472.
+2017-08-31 19:18:44.352+0000 INFO  Started.
+2017-08-31 19:18:46.384+0000 INFO  Remote interface available at http://localhost:7474/
+2017-09-05 14:56:21.076+0000 INFO  Transaction with id 340 has been automatically rolled back due to transaction timeout.
+2017-09-05 14:56:51.059+0000 INFO  Transaction with id 362 has been automatically rolled back due to transaction timeout.
+2017-09-05 14:57:51.054+0000 INFO  Transaction with id 344 has been automatically rolled back due to transaction timeout.
+2017-09-05 14:58:21.052+0000 INFO  Transaction with id 364 has been automatically rolled back due to transaction timeout.

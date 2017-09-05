@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  heading: MyString
+  identifier: MyString
+  text: MyString
+  chapeau: MyString
+  chapter: one
+
+two:
+  heading: MyString
+  identifier: MyString
+  text: MyString
+  chapeau: MyString
+  chapter: two
