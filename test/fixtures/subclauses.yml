@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  text: MyString
+  identifier: MyString
+  clause: one
+
+two:
+  number: MyString
+  text: MyString
+  identifier: MyString
+  clause: two

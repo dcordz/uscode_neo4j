@@ -7,6 +7,9 @@ class SectionParagraph
   property :created_at, type: DateTime
   property :updated_at, type: DateTime
 
+  validates :identifier, presence: true
+  validates_uniqueness_of :identifier
+
   has_one :out, :section, type: :HAS_SECTION
   has_many :in, :subparagraphs, type: :HAS_SECTION_PARAGRAPH
 

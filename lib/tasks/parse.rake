@@ -24,6 +24,8 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
         mod[:number] = item_number(val)
         mod[:heading] = val['heading']
         mod.save!
+        ihash(val)
+
       elsif key == 'part'
         # val is array of parts
         val.each do |par|
@@ -90,7 +92,7 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
           mod = new_instance_of_key_model(key)
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           subsection = new_subsection(mod, val)
-          section_identifier = clip_array(subsec['_identifier'].split('/')).join('/')
+          section_identifier = clip_array(val['_identifier'].split('/')).join('/')
           section = Subsection.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', section_identifier).first
           ihash(val)
         end
@@ -116,7 +118,7 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
           mod = new_instance_of_key_model(key)
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           section_paragraph = new_paragraph(mod, val, parent)
-          section_identifier = clip_array(spara['_identifier'].split('/')).join('/')
+          section_identifier = clip_array(val['_identifier'].split('/')).join('/')
           section = SectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', section_identifier).first
           section.section_paragraphs << section_paragraph
           ihash(val, 'section')
@@ -135,14 +137,15 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
             subsection = SubsectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Subsection }.first.klass.as(:s).where('s.identifier =~ ?', section_identifier).first
 
             subsection.subsection_paragraphs << subsection_paragraph
-            # binding.pry
+            binding.pry unless sspara['subparagraph'].nil?
             ihash(sspara, 'subsection')
           end
         else
           mod = SubsectionParagraph.new
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           subsection_paragraph = new_paragraph(mod, val, parent)
-          subsection = SubsectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Subsection }.first.klass.all.sort_by{ |s| s.created_at }.last
+          section_identifier = clip_array(val['_identifier'].split('/')).join('/')
+          subsection = SubsectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Subsection }.first.klass.as(:s).where('s.identifier =~ ?', section_identifier).first
           subsection.subsection_paragraphs << subsection_paragraph
           ihash(val, 'subsection')
         end
@@ -165,9 +168,24 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
             para_identifier = clip_array(subpara['_identifier'].split('/')).join('/')
             paragraph = Subparagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == para_class.constantize }.first.klass.as(:s).where('s.identifier =~ ?', para_identifier).first
 
+            if paragraph.nil?
+              # mod val parent
+              if para_identifier == "/us/usc/t18/s521/a" || para_identifier == "/us/usc/t18/s1952/a" # subparagraph follows subsection
+                paragraph = new_paragraph(SubsectionParagraph.new, subpara, 'subsection')
+                s = Subsection.where(identifier: para_identifier).first
+                s.subsection_paragraphs << paragraph
+                ihash(subpara)
+              else
+                subparagraph.destroy
+                ihash(subpara)
+              end
+            end
             # paragraph = Subparagraph.reflect_on_all_associations.keep_if{ |assoc| assoc.class_name == para_class }.first.klass.last
-
-            paragraph.subparagraphs << subparagraph
+            begin
+              paragraph.subparagraphs << subparagraph
+            rescue
+              binding.pry
+            end
             # binding.pry
             ihash(subpara)
           end
@@ -175,7 +193,7 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
           mod = new_instance_of_key_model(key)
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           subparagraph = new_subparagraph(mod, val)
-          para_identifier = clip_array(subpara['_identifier'].split('/')).join('/')
+          para_identifier = clip_array(val['_identifier'].split('/')).join('/')
           paragraph = Subparagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == para_class.constantize }.first.klass.as(:s).where('s.identifier =~ ?', para_identifier).first
           paragraph.subparagraphs << subparagraph
           ihash(val)
@@ -193,23 +211,64 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
         # paragraph.subparagraphs << subp
 
       elsif key == 'clause'
-        binding.pry
         if val.is_a?(Array)
           val.each do |claw|
             mod = new_instance_of_key_model(key)
-            binding.pry
+
             puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
             clause = new_clause(mod, claw)
-            subparagraph = Clause.reflect_on_all_associations.select{ |assoc| assoc.klass == Subparagraph }.first.klass.all.sort_by{ |s| s.created_at }.last
-            binding.pry
-            subparagraph.clauses << clause
+
+            subparagraph_identifier = clip_array(claw['_identifier'].split('/')).join('/')
+            subparagraph = Clause.reflect_on_all_associations.last.klass.as(:s).where('s.identifier CONTAINS ?', subparagraph_identifier).sort_by{ |s| s.created_at }.last
+            begin
+              subparagraph.clauses << clause
+            rescue
+              binding.pry
+              clause.destroy
+            end
+            ihash(clause) unless clause['subclause'].nil?
           end
         else
           mod = new_instance_of_key_model(key)
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           clause = new_clause(mod, val)
-          subparagraph = Clause.reflect_on_all_associations.select{ |assoc| assoc.klass == Subparagraph }.first.klass.all.sort_by{ |s| s.created_at }.last
+
+          subparagraph_identifier = clip_array(val['_identifier'].split('/')).join('/')
+
+          subparagraph = Clause.reflect_on_all_associations.last.klass.as(:s).where('s.identifier CONTAINS ?', subparagraph_identifier).sort_by{ |s| s.created_at }.last
+
+          if subparagraph.nil?
+            subparagraph = Clause.reflect_on_all_associations.first.klass.all.sort_by{ |s| s.created_at }.last
+          end
+
           subparagraph.clauses << clause
+          ihash(clause) unless clause['subclause'].nil?
+        end
+
+      elsif key == 'subclause'
+        if val.is_a?(Array)
+          val.each do |claw|
+            mod = new_instance_of_key_model(key)
+
+            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+            clause = new_subclause(mod, claw)
+
+            parent_clause = Subclause.reflect_on_all_associations.first.klass.sort_by{ |s| s.created_at }.last
+            begin
+              parent_clause.subclauses << clause
+            rescue
+              binding.pry
+              clause.destroy
+            end
+          end
+        else
+          mod = new_instance_of_key_model(key)
+          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+          clause = new_subclause(mod, val)
+
+          parent_clause = Subclause.reflect_on_all_associations.first.klass.sort_by{ |s| s.created_at }.last
+
+          parent_clause.subclauses << clause
         end
 
 
@@ -243,7 +302,11 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
   def new_part(mod, val)
     mod[:number] = item_number(val)
     mod[:heading] = val['heading']
-    mod.save!
+    begin
+      mod.save!
+    rescue
+      binding.pry
+    end
     mod
   end
 
@@ -251,7 +314,11 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
     # val is a single chapter
     mod[:number] = item_number(val)
     mod[:heading] = val['heading']
-    mod.save!
+    begin
+      mod.save!
+    rescue
+      binding.pry
+    end
     mod
   end
 
@@ -279,8 +346,7 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
         mod[:text] = mod[:text].strip!
       elsif !val['chapeau'].nil? # section has chapeau, paragraphs, no subsections
         # binding.pry
-        mod[:chapeau] = val['chapeau']['__text'] || val['chapeau']
-        mod[:chapeau] = mod[:chapeau].strip
+        add_chapeau_to_mod(mod, val['chapeau'])
         # include parent as second param in ihash call
         # val['paragraph'].each{ |para| ihash(para, 'section') } # paragraph is array
       # else # section with subsections
@@ -292,14 +358,15 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
         # subsections.each{ |subsec| ihash(subsec) }
       end
     end
-    unless val['continuation'].nil?
-      begin
-        mod[:chapeau] += val['continuation']['__text'] || val['continuation'] unless val['chapeau'].nil?
-      rescue
-        binding.pry
-      end
+    unless val['continuation'].nil? # fucking continuation can be an array
+      mod = add_continuation_to_mod_chapeau(mod, val['continuation'])
     end
-    mod.save!
+    begin
+      mod.save!
+    rescue
+      binding.pry
+      mod = Section.where(identifier: mod[:identifier]).first
+    end
     mod
   end
 
@@ -309,13 +376,19 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
       begin
         mod[:heading] = val['heading']['inline']['__text']
       rescue
-        mod[:heading] = val['heading']
+        begin
+          mod[:heading] = val['heading']
+        rescue
+          binding.pry
+        end
       end
       mod[:heading] = mod[:heading].strip
     end
     mod[:identifier] = val['_identifier']
-    mod[:chapeau] = val['chapeau']['__text'] || val['chapeau'] unless val['chapeau'].nil?
-    mod[:chapeau] = mod[:chapeau].strip unless val['chapeau'].nil?
+    unless val['chapeau'].nil?
+      add_chapeau_to_mod(mod, val['chapeau'])
+    end
+
     if !val['content'].nil? # subection has no paragraphs
       mod[:text] = val['content']['__text'] || val['content']
       mod[:text] = mod[:text].strip
@@ -323,21 +396,38 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
     #   # include 'sub' as second param in ihash call
     #   val['paragraph'].each{ |para| ihash(para, 'subsection') } # paragraph is array of objects
     end
-    if !val['continuation'].nil?
-      mod[:chapeau] += val['continuation']['__text'] || val['continuation'] unless val['chapeau'].nil?
+    unless val['continuation'].nil? || val['chapeau'].nil?
+      mod = add_continuation_to_mod_chapeau(mod, val['continuation'])
     end
     # binding.pry
-    mod.save!
+    begin
+      mod.save!
+    rescue
+      # binding.pry
+      mod = Subsection.where(identifier: mod[:identifier]).first
+    end
+    mod
+  end
+
+  def add_chapeau_to_mod(mod, chapeau)
+    if chapeau.is_a?(Array)
+      mod[:chapeau] = chapeau[0]
+      mod[:chapeau] = mod[:chapeau].strip
+    else
+      mod[:chapeau] = chapeau['__text'] || chapeau
+      mod[:chapeau] = mod[:chapeau].strip
+    end
     mod
   end
 
   def new_paragraph(mod, val, parent) # parent will either be section or subection
     mod[:number] = item_number(val)
     mod[:identifier] = val['_identifier']
-    mod[:chapeau] = val['chapeau']['__text'] || val['chapeau'] unless val['chapeau'].nil?
-    mod[:chapeau] = mod[:chapeau].strip unless val['chapeau'].nil?
+    unless val['chapeau'].nil?
+      add_chapeau_to_mod(mod, val['chapeau'])
+    end
     unless val['continuation'].nil?
-      mod[:chapeau] += val['continuation']['__text'] || val['continuation'] unless val['chapeau'].nil?
+      mod = add_continuation_to_mod_chapeau(mod, val['continuation'])
     end
 
     unless val['subparagraph'].nil?
@@ -350,31 +440,76 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
       mod[:text] = val['content']['__text'] || val['content']
       mod[:text] = mod[:text].strip
     end
-    mod.save!
+    begin
+      mod.save!
+    rescue
+      mod = SectionParagraph.where(identifier: mod[:identifier]).first || SubsectionParagraph.where(identifier: mod[:identifier]).first
+    end
     mod
   end
 
   def new_subparagraph(mod, val)
     mod[:number] = item_number(val)
     mod[:identifier] = val['_identifier']
-    mod[:chapeau] = val['chapeau']['__text'] || val['chapeau'] unless val['chapeau'].nil?
-    mod[:chapeau] = mod[:chapeau].strip unless val['chapeau'].nil?
-    unless val['clause'].nil?
-      val['clause'].each{ |claw| ihash(claw, 'subparagraph_clause') }
-    else
-      mod[:text] = val['content']['__text'] || val['content']
-      mod[:text] = mod[:text].strip
+    unless val['chapeau'].nil?
+      add_chapeau_to_mod(mod, val['chapeau'])
     end
-    mod.save!
+    if val['clause'].nil?
+      begin
+        mod[:text] = val['content']['__text'] || val['content']
+        mod[:text] = mod[:text].strip
+      rescue
+        binding.pry
+      end
+    # else
+    # happens in ihash method
+    #   val['clause'].each{ |claw| ihash(claw, 'subparagraph_clause') }
+    end
+    unless val['continuation'].nil?
+      mod = add_continuation_to_mod_chapeau(mod, val['continuation'])
+    end
+    begin
+      mod.save!
+    rescue
+      binding.pry
+      mod = Subparagraph.where(identifier: mod[:identifier]).first
+    end
     mod
   end
 
   def new_clause(mod, val)
     mod[:number] = item_number(val)
     mod[:identifier] = val['_identifier']
+    # unless val['chapeau'].nil?
+    #   add_chapeau_to_mod(mod, val['chapeau'])
+    # end
+    if val['subclause'].nil?
+      mod[:text] = val['content']['__text'] || val['content']
+      mod[:text] = mod[:text].strip
+    end
+    begin
+      mod.save!
+    rescue
+      binding.pry
+      mod = Clause.where(identifier: mod[:identifier]).first
+    end
+    mod
+  end
+
+  def new_subclause(mod, val)
+    mod[:number] = item_number(val)
+    mod[:identifier] = val['_identifier']
+    # unless val['chapeau'].nil?
+    #   add_chapeau_to_mod(mod, val['chapeau'])
+    # end
     mod[:text] = val['content']['__text'] || val['content']
-    mod[:text].strip
-    mod.save!
+    mod[:text] = mod[:text].strip
+    begin
+      mod.save!
+    rescue
+      binding.pry
+      mod = Subclause.where(identifier: mod[:identifier]).first
+    end
     mod
   end
 
@@ -393,6 +528,23 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
 
   def clip_array(array)
     array.take(array.size - 1)
+  end
+
+  def add_continuation_to_mod_chapeau(mod, continuation)
+    if continuation.is_a?(Array)
+      continuation.each do |cont|
+        begin
+          mod[:chapeau] += cont['__text']
+        rescue
+          next
+        end
+      end
+    elsif continuation.is_a?(String)
+      mod[:chapeau] += continuation
+    else
+      mod[:chapeau] += continuation['__text']
+    end
+    mod
   end
 
   # get section from key, create new model instance

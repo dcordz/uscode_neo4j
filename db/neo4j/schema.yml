@@ -20,6 +20,7 @@
 - CONSTRAINT ON ( section:Section ) ASSERT section.uuid IS UNIQUE
 - CONSTRAINT ON ( sectionparagraph:SectionParagraph ) ASSERT sectionparagraph.uuid
   IS UNIQUE
+- CONSTRAINT ON ( subclause:Subclause ) ASSERT subclause.uuid IS UNIQUE
 - CONSTRAINT ON ( subparagraph:Subparagraph ) ASSERT subparagraph.uuid IS UNIQUE
 - CONSTRAINT ON ( subsection:Subsection ) ASSERT subsection.uuid IS UNIQUE
 - CONSTRAINT ON ( subsectionparagraph:SubsectionParagraph ) ASSERT subsectionparagraph.uuid
@@ -36,3 +37,5 @@
 - '20170901012545'
 - '20170901012649'
 - '20170901012716'
+- '20170906004459'
+- '20170906005558'

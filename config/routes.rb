@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subclauses
   resources :clauses
   resources :subparagraphs
   resources :subsections
