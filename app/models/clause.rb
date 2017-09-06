@@ -3,6 +3,7 @@ class Clause
   property :number, type: String
   property :identifier, type: String
   property :text, type: String
+  property :chapeau, type: String
 
   validates :identifier, presence: true
   validates_uniqueness_of :identifier
