@@ -37,14 +37,13 @@ task :parse_us_code => :environment do
 
       elsif key == 'part'
         # val is array of parts
-        create_val_level(key, val)
         val.each do |par|
           mod = new_instance_of_key_model(key)
           puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
           part = new_part(mod, par)
           next if part[:heading].nil? || part[:number].nil?
 
-          title = Part.reflect_on_all_associations.select{ |assoc| assoc.klass == Title }.first.klass.all.sort_by{ |s| s.created_at }.last
+          title = Part.reflect_on_all_associations.select{ |assoc| assoc.klass == Title }.first.klass.all.order(:created_at).last
           title.parts << part
 
           # binding.pry
@@ -54,280 +53,77 @@ task :parse_us_code => :environment do
       elsif key == 'chapter'
         # val is array of chapters
         if val.is_a?(Array)
-          val.each do |chp|
-            mod = new_instance_of_key_model(key)
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            chapter = new_chapter(mod, chp)
-
-
-            next if chapter[:heading].nil? || chapter[:number].nil?
-            part = Chapter.reflect_on_all_associations.select{ |assoc| assoc.klass == Part }.first.klass.all.sort_by{ |s| s.created_at }.last
-
-            if part.nil? # title has no parts, chapters related to title
-              title = Chapter.reflect_on_all_associations.select{ |assoc| assoc.klass == Title }.first.klass.all.sort_by{ |s| s.created_at }.last
-              title.chapters << chapter
-            else
-              part.chapters << chapter
-            end
-            binding.pry if !chp['paragraph'].nil?
-            ihash(chp)
-          end
+          val.each{ |chp| new_chapter_from_val(key, chp) }
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          chapter = new_chapter(mod, val)
-          next if chapter[:heading].nil? || chapter[:number].nil?
-          part = Chapter.reflect_on_all_associations.select{ |assoc| assoc.klass == Part }.first.klass.all.sort_by{ |s| s.created_at }.last
-          part.chapters << chapter
-          binding.pry unless val['paragraph'].nil?
-          ihash(val)
+          new_chapter_from_val(key, val)
         end
 
       elsif key == 'section'
         # val is array of sections
         if val.is_a?(Array)
-          val.each do |sec|
-            mod = new_instance_of_key_model(key)
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            section = new_section(mod, sec) # mod is still previous node
-
-            chapter = Section.reflect_on_all_associations.select{ |assoc| assoc.klass == Chapter }.first.klass.all.sort_by{ |s| s.created_at }.last
-            chapter.sections << section
-
-            # binding.pry unless sec['chapeau'].nil?
-            ihash(sec, 'section')
-          end
+          val.each{ |sec| new_section_from_val(key, sec) }
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          section = new_section(mod, val)
-          chapter = Section.reflect_on_all_associations.select{ |assoc| assoc.klass == Chapter }.first.klass.all.sort_by{ |s| s.created_at }.last
-          chapter.sections << section
-          ihash(val, 'section')
+          new_section_from_val(key, val)
         end
 
       elsif key == 'subsection'
         if val.is_a?(Array)
-          val.each do |subsec|
-            mod = new_instance_of_key_model(key)
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            subsection = new_subsection(mod, subsec)
-            id = subsec['identifier'] || subsec['identifier']
-            begin
-              sectionidentifier = clip_array(id.split('/')).join('/')
-            rescue
-              binding.pry
-            end
-            section = Subsection.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-            begin
-              section.subsections << subsection
-            rescue
-              binding.pry
-            end
-            # binding.pry
-            ihash(subsec, 'subsection')
-          end
+          val.each{ |subsec| new_subsection_from_val(key, subsec) }
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          subsection = new_subsection(mod, val)
-          id = val['identifier'] || val['identifier']
-          sectionidentifier = clip_array(id.split('/')).join('/')
-          section = Subsection.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-          ihash(val, 'subsection')
+          new_subsection_from_val(key, val)
         end
 
       elsif key == 'paragraph' && parent == 'section'
         # get tricky here, paragraphs can be in sections or subs
         # this matters because of how associations are built
         if val.is_a?(Array)
-          val.each do |spara|
-            mod = SectionParagraph.new
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            # binding.pry unless spara['subparagraph'].nil?
-            section_paragraph = new_paragraph(mod, spara, parent)
-            id = spara['identifier'] || spara['identifier']
-            begin
-              sectionidentifier = clip_array(id.split('/')).join('/')
-            rescue
-              binding.pry
-            end
-            section = SectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-
-            section.section_paragraphs << section_paragraph
-            # binding.pry unless spara['subparagraph'].nil?
-            ihash(spara, parent)
-          end
+          val.each{ |spara| new_section_paragraph(key, spara, parent) }
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          section_paragraph = new_paragraph(mod, val, parent)
-          id = val['identifier'] || val['identifier']
-          sectionidentifier = clip_array(id.split('/')).join('/')
-          section = SectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Section }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-          section.section_paragraphs << section_paragraph
-          ihash(val, parent)
+          new_section_paragraph(key, val, parent)
         end
 
       elsif key == 'paragraph' && parent == 'subsection'
         # get tricky here, paragraphs can be in sections or subs
         # this matters because of how associations are built
         if val.is_a?(Array)
-          val.each do |sspara|
-            mod = SubsectionParagraph.new
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            subsection_paragraph = new_paragraph(mod, sspara, parent)
-
-            sectionidentifier = clip_array(sspara['identifier'].split('/')).join('/')
-            subsection = SubsectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Subsection }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-
-            subsection.subsection_paragraphs << subsection_paragraph
-            ihash(sspara, parent)
-          end
+          val.each{ |sspara| new_subsection_paragraph(key, sspara, parent) }
         else
-          mod = SubsectionParagraph.new
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          subsection_paragraph = new_paragraph(mod, val, parent)
-          sectionidentifier = clip_array(val['identifier'].split('/')).join('/')
-          subsection = SubsectionParagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == Subsection }.first.klass.as(:s).where('s.identifier =~ ?', sectionidentifier).first
-          subsection.subsection_paragraphs << subsection_paragraph
-          ihash(val, parent)
+          new_subsection_paragraph(key, sspara, parent)
         end
 
       elsif key == 'subparagraph'
         # parent == section_paragraph or sub_section_paragraph
-        para_class = ""
+        parent_class = ""
         if parent == 'section'
-          para_class = 'SectionParagraph'
+          parent_class = 'SectionParagraph'
         elsif parent == 'subsection'
-          para_class = 'SubsectionParagraph'
+          parent_class = 'SubsectionParagraph'
         else
           binding.pry
-          para_class = ""
+          parent_class = ""
         end
         if val.is_a?(Array)
           val.each do |subpara|
-            mod = new_instance_of_key_model(key)
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            # binding.pry
-            subparagraph = new_subparagraph(mod, subpara)
-            para_class = get_para_class(subpara['identifier']) if para_class.blank?
-            next if para_class.blank?
-
-            paraidentifier = clip_array(subpara['identifier'].split('/')).join('/')
-            paragraph = Subparagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == para_class.constantize }.first.klass.as(:s).where('s.identifier =~ ?', paraidentifier).first
-
-            if paragraph.nil?
-              # mod val parent
-              if paraidentifier == "/us/usc/t18/s521/a" || paraidentifier == "/us/usc/t18/s1952/a" # subparagraph follows subsection
-                paragraph = new_paragraph(SubsectionParagraph.new, subpara, 'subsection')
-                s = Subsection.where(identifier: paraidentifier).first
-                s.subsection_paragraphs << paragraph
-                ihash(subpara)
-              else
-                subparagraph.destroy
-                ihash(subpara)
-              end
-            end
-            # paragraph = Subparagraph.reflect_on_all_associations.keep_if{ |assoc| assoc.class_name == para_class }.first.klass.last
-            begin
-              paragraph.subparagraphs << subparagraph
-            rescue
-              # binding.pry
-            end
-            # binding.pry
-            ihash(subpara) unless subpara['subclause']
+            next if new_subparagraph_from_val(key, val, parent_class).nil?
           end
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          subparagraph = new_subparagraph(mod, val)
-          paraidentifier = clip_array(val['identifier'].split('/')).join('/')
-          paragraph = Subparagraph.reflect_on_all_associations.select{ |assoc| assoc.klass == para_class.constantize }.first.klass.as(:s).where('s.identifier =~ ?', paraidentifier).first
-          paragraph.subparagraphs << subparagraph
-          ihash(val) unless val['subclause']
+          new_subparagraph_from_val(key, val, parent_class)
         end
-
-
-        # subp = new_subparagraph(mod, val)
-        # # subparagraph would have two associations, can't use .last
-        # if parent == 'section_paragraph'
-        #   para_class == 'SectionParagraph'
-        # else
-        #   para_class = 'SubsectionParagraph'
-        # end
-        # paragraph = Subparagraph.reflect_on_all_associations.keep_if{ |assoc| assoc.class_name == para_class }.first.klass.last
-        # paragraph.subparagraphs << subp
 
       elsif key == 'clause'
         if val.is_a?(Array)
           val.each do |claw|
-            if claw['num'].nil?
-              ihash(claw)
-              next
-            end
-            mod = new_instance_of_key_model(key)
-
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            clause = new_clause(mod, claw)
-
-            subparagraphidentifier = clip_array(claw['identifier'].split('/')).join('/')
-            subparagraph = Clause.reflect_on_all_associations.last.klass.as(:s).where('s.identifier CONTAINS ?', subparagraphidentifier).sort_by{ |s| s.created_at }.last
-            begin
-              subparagraph.clauses << clause
-            rescue
-              # binding.pry
-              clause.destroy
-            end
-            ihash(clause) unless clause['subclause'].nil?
+            next if new_clause_from_val(key, claw).nil?
           end
         else
-          next if val['num'].nil?
-
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          clause = new_clause(mod, val)
-          begin
-            subparagraphidentifier = clip_array(val['identifier'].split('/')).join('/')
-          rescue
-            ihash(val)
-            next
-          end
-
-          subparagraph = Clause.reflect_on_all_associations.last.klass.as(:s).where('s.identifier CONTAINS ?', subparagraphidentifier).sort_by{ |s| s.created_at }.last
-
-          if subparagraph.nil?
-            subparagraph = Clause.reflect_on_all_associations.first.klass.all.sort_by{ |s| s.created_at }.last
-          end
-
-          subparagraph.clauses << clause
-          ihash(val) unless val['subclause'].nil?
+          new_clause_from_val(key, val)
         end
 
       elsif key == 'subclause'
         if val.is_a?(Array)
-          val.each do |claw|
-            mod = new_instance_of_key_model(key)
-
-            puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-            clause = new_subclause(mod, claw)
-
-            parent_clause = Subclause.reflect_on_all_associations.first.klass.sort_by{ |s| s.created_at }.last
-            begin
-              parent_clause.subclauses << clause
-            rescue
-              binding.pry
-              clause.destroy
-            end
-          end
+          val.each{ |claw| new_subclause_from_val(key, claw) }
         else
-          mod = new_instance_of_key_model(key)
-          puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-          clause = new_subclause(mod, val)
-
-          parent_clause = Subclause.reflect_on_all_associations.first.klass.sort_by{ |s| s.created_at }.last
-
-          parent_clause.subclauses << clause
+          new_subclause_from_val(key, val)
         end
       end
 
@@ -338,25 +134,178 @@ task :parse_us_code => :environment do
     end
   end
 
-  def create_val_level(key, val)
-    if val.is_a?(Array)
-      val.each do |child|
-        mod = new_instance_of_key_model(key)
-        puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
-        level = method("new_#{child}").call(mod, child)
+  def new_chapter_from_val(key, val)
+    mod = new_instance_of_key_model(key)
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    chapter = new_chapter(mod, val)
 
-        # Model.reflect_on_all_associations.first is parent model
-        parent_class = mod.class.reflect_on_all_associations.first.klass
-        parent = parent_class.all.sort_by{ |s| s.created_at }.last
+    next if chapter[:heading].nil? || chapter[:number].nil?
 
-        plural = "#{level}".pluralize
+    id = chapter[:identifier]
+    part_identifier = clip_array(id.split('/')).join('/')
+    part = Part.where(identifier: part_identifier).first
 
-        parent[plural] << level
-
-      end
+    if part.nil? # title has no parts, chapters related to title
+      title = Title.order(:created_at).last
+      title.chapters << chapter
     else
-
+      part.chapters << chapter
     end
+    binding.pry unless val['paragraph'].nil?
+    ihash(chp)
+  end
+
+  def new_section_from_val(key, val)
+    mod = new_instance_of_key_model(key)
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    section = new_section(mod, val) # mod is still previous node
+
+    id = section[:identifier]
+    chapter_identifier = clip_array(id.split('/')).join('/')
+    chapter = Chapter.as(:c).where(identifier: chapter_identifier).first
+
+    binding.pry if chapter.nil?
+
+    chapter.sections << section
+    ihash(val, 'section')
+  end
+
+  def new_subsection_from_val(key, val)
+    mod = new_instance_of_key_model(key)
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    subsection = new_subsection(mod, val)
+    id = val['identifier'] || val['_identifier']
+    begin
+      section_identifier = clip_array(id.split('/')).join('/')
+    rescue
+      binding.pry
+    end
+    section = Section.where(identifier: section_identifier).first
+    binding.pry if section.nil?
+    section.subsections << subsection
+    ihash(val, 'subsection')
+  end
+
+  def new_section_paragraph(key, val, parent)
+    mod = SectionParagraph.new
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    section_paragraph = new_paragraph(mod, val, parent)
+
+    id = val['identifier'] || val['_identifier']
+    begin
+      section_identifier = clip_array(id.split('/')).join('/')
+    rescue
+      binding.pry
+    end
+    section = Section.where(identifier: section_identifier).first
+    binding.pry if section.nil?
+    section.section_paragraphs << section_paragraph
+    ihash(val, parent)
+  end
+
+  def new_subsection_paragraph(key, val, parent)
+    mod = SubsectionParagraph.new
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    subsection_paragraph = new_paragraph(mod, val, parent)
+
+    id = val['identifier'] || val['_identifier']
+    section_identifier = clip_array(id.split('/')).join('/')
+
+    subsection = Subsection.where(identifier: section_identifier).first
+    binding.pry if subsection.nil?
+    subsection.subsection_paragraphs << subsection_paragraph
+    ihash(val, parent)
+  end
+
+  def new_subparagraph_from_val(key, val, parent_class)
+    mod = new_instance_of_key_model(key)
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    # binding.pry
+    subparagraph = new_subparagraph(mod, val)
+
+    id = val['identifier'] || val['_identifier']
+    parent_class = get_parent_class(id) if parent_class.blank?
+    return nil if parent_class.blank?
+
+    para_identifier = clip_array(id.split('/')).join('/')
+
+    paragraph = Subparagraph.reflect_on_all_associations
+                            .select{ |assoc| assoc.klass == para_class.constantize }
+                            .first
+                            .klass.as(:s)
+                            .where('s.identifier =~ ?', para_identifier)
+                            .first
+
+    if paragraph.nil?
+      # mod val parent
+      if para_identifier == "/us/usc/t18/s521/a" || para_identifier == "/us/usc/t18/s1952/a" # subparagraph follows subsection
+        paragraph = new_paragraph(SubsectionParagraph.new, val, 'subsection')
+        s = Subsection.where(identifier: para_identifier).first
+        s.subsection_paragraphs << paragraph
+        ihash(val)
+        return nil
+      else
+        subparagraph.destroy
+        ihash(val)
+        return nil
+      end
+    end
+    begin
+      paragraph.subparagraphs << subparagraph
+    rescue
+      binding.pry
+    end
+    ihash(val) unless val['subclause']
+  end
+
+  def new_clause_from_val(key, val)
+    if val['num'].nil?
+      ihash(val)
+      return nil
+    end
+    mod = new_instance_of_key_model(key)
+
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    clause = new_clause(mod, val)
+
+    id = val['identifier'] || val['_identifier']
+    subparagraph_identifier = clip_array(id.split('/')).join('/')
+    subparagraph = Subparagraph.where(identifier: subparagraph_identifier)
+
+    begin
+      subparagraph.clauses << clause
+    rescue
+      binding.pry
+      clause.destroy
+    end
+    ihash(clause) unless clause['subclause'].nil?
+  end
+
+  def new_subclause_from_val(key, val)
+    mod = new_instance_of_key_model(key)
+
+    puts "mod is a new instance of #{mod} Model"#.colorize(:yellow)
+    subclause = new_subclause(mod, claw)
+
+    id = val['identifier'] || val['_identifier']
+    clause_id = clip_array(id.split('/')).join('/')
+    parent_clause = Clause.where(identifier: clause_id)
+
+    if parent_clause.nil?
+      parent_clause = Clause.order(:created_at).last
+    end
+
+    begin
+      parent_clause.subclauses << subclause
+    rescue
+      binding.pry
+      subclause.destroy
+    end
+  end
+
+  def get_model_parent_association(mod)
+    parent_class = mod.class.reflect_on_all_associations.first.klass
+    parent_class.all.order(:created_at).last
   end
 
   # mod is new instance of model, val is hash of data from uscode
