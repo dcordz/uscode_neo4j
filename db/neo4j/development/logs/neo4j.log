@@ -1,20 +1,70 @@
-2017-08-31 19:18:36.368+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-08-31 19:18:36.524+0000 INFO  Starting...
-2017-08-31 19:18:39.450+0000 INFO  Bolt enabled on localhost:7472.
-2017-08-31 19:18:44.352+0000 INFO  Started.
-2017-08-31 19:18:46.384+0000 INFO  Remote interface available at http://localhost:7474/
-2017-09-05 14:56:21.076+0000 INFO  Transaction with id 340 has been automatically rolled back due to transaction timeout.
-2017-09-05 14:56:51.059+0000 INFO  Transaction with id 362 has been automatically rolled back due to transaction timeout.
-2017-09-05 14:57:51.054+0000 INFO  Transaction with id 344 has been automatically rolled back due to transaction timeout.
-2017-09-05 14:58:21.052+0000 INFO  Transaction with id 364 has been automatically rolled back due to transaction timeout.
-2017-09-05 23:13:39.469+0000 INFO  Transaction with id 36971 has been automatically rolled back due to transaction timeout.
-2017-09-06 13:27:18.034+0000 INFO  Transaction with id 191020 has been automatically rolled back due to transaction timeout.
-2017-09-06 15:05:47.655+0000 INFO  Transaction with id 319226 has been automatically rolled back due to transaction timeout.
-2017-09-06 18:42:11.079+0000 INFO  Neo4j Server shutdown initiated by request
-2017-09-06 18:42:11.178+0000 INFO  Stopping...
-2017-09-06 18:42:11.306+0000 INFO  Stopped.
-2017-09-06 18:46:03.196+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-09-06 18:46:03.400+0000 INFO  Starting...
-2017-09-06 18:46:08.600+0000 INFO  Bolt enabled on localhost:7472.
-2017-09-06 18:46:42.451+0000 INFO  Started.
-2017-09-06 18:46:49.926+0000 INFO  Remote interface available at http://localhost:7474/
+2017-09-07 02:34:21.069+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-09-07 02:34:21.185+0000 INFO  Starting...
+2017-09-07 02:34:23.571+0000 INFO  Bolt enabled on localhost:7472.
+2017-09-07 02:34:29.657+0000 INFO  Started.
+2017-09-07 02:34:31.863+0000 INFO  Remote interface available at http://localhost:7474/
+2017-09-07 02:57:30.888+0000 INFO  Neo4j Server shutdown initiated by request
+2017-09-07 02:57:30.906+0000 INFO  Stopping...
+2017-09-07 02:57:30.970+0000 INFO  Stopped.
+2017-09-29 19:58:46.838+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-09-29 19:58:46.965+0000 INFO  Starting...
+2017-09-29 19:58:48.813+0000 INFO  Bolt enabled on localhost:7472.
+2017-09-29 19:58:56.081+0000 INFO  Started.
+2017-09-29 19:58:59.392+0000 INFO  Remote interface available at http://localhost:7474/
+2017-09-29 20:39:56.191+0000 INFO  Transaction with id 5041 has been automatically rolled back due to transaction timeout.
+2017-09-29 21:52:44.939+0000 ERROR Failed to generate JSON output. Current context not an ARRAY but OBJECT
+org.codehaus.jackson.JsonGenerationException: Current context not an ARRAY but OBJECT
+	at org.codehaus.jackson.impl.JsonGeneratorBase._reportError(JsonGeneratorBase.java:480)
+	at org.codehaus.jackson.impl.Utf8Generator.writeEndArray(Utf8Generator.java:354)
+	at org.neo4j.server.rest.transactional.RestRepresentationWriter.write(RestRepresentationWriter.java:64)
+	at org.neo4j.server.rest.transactional.AggregatingWriter.write(AggregatingWriter.java:43)
+	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.lambda$writeRows$0(ExecutionResultSerializer.java:449)
+	at org.neo4j.cypher.internal.compatibility.v3_2.ExecutionResultWrapper$$anon$1.visit(ExecutionResultWrapper.scala:162)
+	at org.neo4j.cypher.internal.compiler.v3_2.helpers.RuntimeJavaValueConverter$feedIteratorToVisitable.accept(RuntimeJavaValueConverter.scala:55)
+	at org.neo4j.cypher.internal.compiler.v3_2.PipeExecutionResult.accept(PipeExecutionResult.scala:109)
+	at org.neo4j.cypher.internal.compatibility.v3_2.ExecutionResultWrapper.accept(ExecutionResultWrapper.scala:159)
+	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply$mcV$sp(ClosingExecutionResult.scala:169)
+	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply(ClosingExecutionResult.scala:168)
+	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply(ClosingExecutionResult.scala:168)
+	at org.neo4j.cypher.internal.compatibility.v3_2.exceptionHandler$runSafely$.apply(exceptionHandler.scala:90)
+	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult.accept(ClosingExecutionResult.scala:168)
+	at org.neo4j.cypher.internal.javacompat.ExecutionResult.accept(ExecutionResult.java:318)
+	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.writeRows(ExecutionResultSerializer.java:444)
+	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.statementResult(ExecutionResultSerializer.java:112)
+	at org.neo4j.server.rest.transactional.TransactionHandle.executeStatements(TransactionHandle.java:324)
+	at org.neo4j.server.rest.transactional.TransactionHandle.commit(TransactionHandle.java:157)
+	at org.neo4j.server.rest.web.TransactionalService.lambda$executeStatementsAndCommit$1(TransactionalService.java:217)
+	at com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
+	at com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
+	at com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
+	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
+	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:558)
+	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:733)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
+	at org.neo4j.server.rest.dbms.AuthorizationDisabledFilter.doFilter(AuthorizationDisabledFilter.java:49)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.neo4j.server.rest.web.CollectUserAgentFilter.doFilter(CollectUserAgentFilter.java:69)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
+	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+	at org.eclipse.jetty.server.Server.handle(Server.java:497)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
+	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+2017-09-29 21:52:44.947+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
+2017-09-29 21:52:44.963+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
