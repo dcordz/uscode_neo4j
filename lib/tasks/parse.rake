@@ -73,6 +73,13 @@ task :parse => :environment do
 
     # create a new node of the subtype
     # klass = el_type.titleize.constantize
+    n = Node.find_by(identifier: identifier, path: path, type: el_type, num: num)
+
+    if !n.nil?
+      puts "Node already exists, skipping".colorize(:red)
+      return nil
+    end
+
     klass = Node.new({
       type: el_type,
       num: num,
@@ -84,7 +91,9 @@ task :parse => :environment do
       continuation: continuation,
       text: el_text
     })
-    klass.save!
+    if klass.save!
+      puts "Node created #{path} at #{DateTime.now.in_time_zone("Eastern Time (US & Canada)")}".colorize(:green)
+    end
 
     master_els << {
       type: el_type,

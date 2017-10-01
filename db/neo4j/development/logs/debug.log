@@ -1466,3 +1466,93 @@ RETURN 'procedures' as a, procedures as result
 2017-09-30 02:51:58.276+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250538]:  Check pointing completed
 2017-09-30 02:51:58.276+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
 2017-09-30 02:51:58.276+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 03:06:58.506+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Starting check pointing...
+2017-09-30 03:06:58.507+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Starting store flush...
+2017-09-30 03:06:58.542+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 250601 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 03:06:58.546+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 250601 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 03:06:58.553+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Store flush completed
+2017-09-30 03:06:58.554+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Starting appending check point entry into the tx log...
+2017-09-30 03:06:58.555+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Appending check point entry into the tx log completed
+2017-09-30 03:06:58.555+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [250601]:  Check pointing completed
+2017-09-30 03:06:58.555+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 03:06:58.555+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 03:21:59.608+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Starting check pointing...
+2017-09-30 03:21:59.609+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Starting store flush...
+2017-09-30 03:21:59.665+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 263431 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 03:21:59.668+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 263431 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 03:21:59.784+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Store flush completed
+2017-09-30 03:21:59.784+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Starting appending check point entry into the tx log...
+2017-09-30 03:21:59.784+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Appending check point entry into the tx log completed
+2017-09-30 03:21:59.784+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [263431]:  Check pointing completed
+2017-09-30 03:21:59.785+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 03:21:59.785+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 03:36:59.985+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Starting check pointing...
+2017-09-30 03:36:59.986+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Starting store flush...
+2017-09-30 03:37:00.022+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 272430 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 03:37:00.025+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 272430 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 03:37:00.166+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Store flush completed
+2017-09-30 03:37:00.167+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Starting appending check point entry into the tx log...
+2017-09-30 03:37:00.174+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Appending check point entry into the tx log completed
+2017-09-30 03:37:00.174+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [272430]:  Check pointing completed
+2017-09-30 03:37:00.174+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 03:37:00.174+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 08:20:23.032+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Starting check pointing...
+2017-09-30 08:20:23.077+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 22206ms.
+2017-09-30 08:20:23.077+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Starting store flush...
+2017-09-30 08:20:23.675+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 273764 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 08:20:23.694+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 273764 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Store flush completed
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Starting appending check point entry into the tx log...
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Appending check point entry into the tx log completed
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [273764]:  Check pointing completed
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 08:20:23.734+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 08:26:16.516+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 214ms.
+2017-09-30 08:26:17.515+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 683ms.
+2017-09-30 08:26:18.100+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 485ms.
+2017-09-30 08:26:51.842+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 357ms.
+2017-09-30 08:27:08.044+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 259ms.
+2017-09-30 08:35:23.947+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Starting check pointing...
+2017-09-30 08:35:23.948+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Starting store flush...
+2017-09-30 08:35:24.142+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 275876 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 08:35:24.144+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 275876 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 08:35:24.200+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Store flush completed
+2017-09-30 08:35:24.200+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Starting appending check point entry into the tx log...
+2017-09-30 08:35:24.208+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Appending check point entry into the tx log completed
+2017-09-30 08:35:24.208+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [275875]:  Check pointing completed
+2017-09-30 08:35:24.208+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 08:35:24.208+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 08:50:24.507+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Starting check pointing...
+2017-09-30 08:50:24.515+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Starting store flush...
+2017-09-30 08:50:24.560+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 278619 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 08:50:24.573+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 278619 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-09-30 08:50:24.616+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Store flush completed
+2017-09-30 08:50:24.616+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Starting appending check point entry into the tx log...
+2017-09-30 08:50:24.617+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Appending check point entry into the tx log completed
+2017-09-30 08:50:24.617+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [278619]:  Check pointing completed
+2017-09-30 08:50:24.617+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 08:50:24.617+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 09:05:24.875+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Starting check pointing...
+2017-09-30 09:05:24.876+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Starting store flush...
+2017-09-30 09:05:24.910+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 282091 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 09:05:24.911+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 282091 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b].
+2017-09-30 09:05:24.933+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Store flush completed
+2017-09-30 09:05:24.934+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Starting appending check point entry into the tx log...
+2017-09-30 09:05:24.934+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Appending check point entry into the tx log completed
+2017-09-30 09:05:24.934+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [282090]:  Check pointing completed
+2017-09-30 09:05:24.934+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2017-09-30 09:05:24.934+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2017-09-30 09:08:39.725+0000 INFO [o.n.k.NeoStoreDataSource] Rotating log version:0
+2017-09-30 09:08:39.770+0000 INFO [o.n.k.NeoStoreDataSource] Opened logical log [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.transaction.db.1] version=1, lastTxId=282962 (clean)
+2017-09-30 09:08:39.770+0000 INFO [o.n.k.NeoStoreDataSource] Finished rotating log version:0
+2017-10-01 22:44:02.047+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Starting check pointing...
+2017-10-01 22:44:02.103+0000 WARN [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 21302ms.
+2017-10-01 22:44:02.116+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Starting store flush...
+2017-10-01 22:44:02.328+0000 INFO [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 283227 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-10-01 22:44:02.329+0000 INFO [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 283227 to [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.b], from [/Users/david/Rails-Projects/uscode_neo4j/db/neo4j/development/data/databases/graph.db/neostore.counts.db.a].
+2017-10-01 22:44:02.339+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Store flush completed
+2017-10-01 22:44:02.339+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Starting appending check point entry into the tx log...
+2017-10-01 22:44:02.339+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Appending check point entry into the tx log completed
+2017-10-01 22:44:02.339+0000 INFO [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [283227]:  Check pointing completed
+2017-10-01 22:44:02.340+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [1]:  Starting log pruning.
+2017-10-01 22:44:02.341+0000 INFO [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [1]:  Log pruning complete.
