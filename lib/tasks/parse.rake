@@ -15,7 +15,7 @@ task :parse => :environment do
   # chapeau = html.css('div.chapeau').text.strip
 
   # element is html element being iterated on, top level is section
-  def parse_el(el, parent_numbers = [], master_els = [])
+  def parse_el(el, parent_numbers = [])
 
     # get element subtype from $subtypes
     el_type = el.name
@@ -73,7 +73,7 @@ task :parse => :environment do
 
     # create a new node of the subtype
     # klass = el_type.titleize.constantize
-    n = Node.find_by(identifier: identifier, path: path, type: el_type, num: num)
+    n = Node.find_by(identifier: identifier, path: path, type: el_type, num: num, title_number: parent_numbers.first[:title_number])
 
     if !n.nil?
       puts "Node already exists, skipping".colorize(:red)
@@ -89,23 +89,12 @@ task :parse => :environment do
       heading: heading,
       chapeau: chapeau,
       continuation: continuation,
-      text: el_text
+      text: el_text,
+      title_number: parent_numbers.first[:title_number]
     })
     if klass.save!
-      puts "Node created #{path} at #{DateTime.now.in_time_zone("Eastern Time (US & Canada)")}".colorize(:green)
+      puts "Node created #{path} at #{DateTime.now.in_time_zone("Eastern Time (US & Canada)")} for Title #{parent_numbers.first[:title_number]}".colorize(:green)
     end
-
-    master_els << {
-      type: el_type,
-      num: num,
-      parent_numbers: parent_numbers,
-      identifier: identifier,
-      path: path,
-      heading: heading,
-      chapeau: chapeau,
-      continuation: continuation,
-      text: el_text
-    }
 
     # add the subtype to a parent subtype
     # sections have no parents only children
@@ -118,10 +107,9 @@ task :parse => :environment do
       child_name = child.name
       next if child_name.nil? || child_name.blank?
       if $subtypes.any? { |t| child_name.include?(t) } # is the child a subtype?
-        parse_el(child, parent_numbers.dup, master_els) # use .dup to remove a reference
+        parse_el(child, parent_numbers.dup) # use .dup to remove a reference
       end
     end
-    master_els
   end
 
   def get_base_path(parent_numbers)
@@ -144,6 +132,8 @@ task :parse => :environment do
     nums = parent_numbers.collect_concat.with_index do |n, i|
       # don't wrap section number in ()
       if i.zero?
+        ''
+      elsif i == 1
         n.values.first
       else
         "(#{n.values.first})"
@@ -153,10 +143,11 @@ task :parse => :environment do
   end
 
   $node_count = Node.count
-  dir = '/Users/david/Rails-Projects/uscode/uscode_sections'
+  dir = '/Users/dcordz/Personal-Projects/legisme/uscode_neo4j/uscode_sections'
   files = Dir.open(dir)
-  completed_files = %w(. .. usc01.xml usc02.xml usc03.xml usc04.xml usc05.xml usc05A.xml usc06.xml usc07.xml usc08.xml usc09.xml)
-  files.each do |file|
+  completed_files = %w(. .. .DS_Store)
+  files.each_with_index do |file, i|
+    next if i < 55 # title is i - 6, so title 28 is i 34
     puts "On File #{file}".colorize(:green)
     puts "Number of Nodes == #{$node_count}".colorize(:yellow)
     next if completed_files.any?{ |f| f == file }
@@ -174,4 +165,5 @@ task :parse => :environment do
     puts "Total Number of Nodes in Title #{title_number} == #{Node.count - $node_count}".colorize(:magenta)
     $node_count = Node.count
   end
+  puts "FINISH!!!!!!!".colorize(:red)
 end

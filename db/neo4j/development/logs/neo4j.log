@@ -68,3 +68,49 @@ org.codehaus.jackson.JsonGenerationException: Current context not an ARRAY but O
 	at java.lang.Thread.run(Thread.java:745)
 2017-09-29 21:52:44.947+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
 2017-09-29 21:52:44.963+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
+2017-10-04 19:49:42.394+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-04 19:49:42.427+0000 INFO  Starting...
+2017-10-04 19:49:43.207+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-04 19:49:45.269+0000 INFO  Started.
+2017-10-04 19:49:46.015+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-04 19:50:42.213+0000 INFO  Neo4j Server shutdown initiated by request
+2017-10-04 19:50:42.225+0000 INFO  Stopping...
+2017-10-04 19:50:42.244+0000 INFO  Stopped.
+2017-10-04 19:52:58.163+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-04 19:52:58.188+0000 INFO  Starting...
+2017-10-04 19:52:58.808+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-04 19:53:00.472+0000 INFO  Started.
+2017-10-04 19:53:01.226+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-04 19:57:00.496+0000 INFO  Transaction with id 8668 has been automatically rolled back due to transaction timeout.
+2017-10-06 13:51:28.651+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-06 13:51:28.701+0000 INFO  Starting...
+2017-10-06 13:51:29.622+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-06 13:51:33.512+0000 INFO  Started.
+2017-10-06 13:51:34.395+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-07 06:51:36.361+0000 INFO  Neo4j Server shutdown initiated by request
+2017-10-07 06:51:36.384+0000 INFO  Stopping...
+2017-10-07 06:51:36.416+0000 INFO  Stopped.
+2017-10-07 18:12:13.305+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-07 18:12:13.352+0000 INFO  Starting...
+2017-10-07 18:12:19.283+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-07 18:12:27.711+0000 INFO  Started.
+2017-10-07 18:12:28.628+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-10 14:45:10.185+0000 INFO  Neo4j Server shutdown initiated by request
+2017-10-10 14:45:10.199+0000 INFO  Stopping...
+2017-10-10 14:45:10.239+0000 INFO  Stopped.
+2017-10-11 21:31:43.552+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-11 21:31:43.601+0000 INFO  Starting...
+2017-10-11 21:31:49.523+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-11 21:31:58.415+0000 INFO  Started.
+2017-10-11 21:31:59.396+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-14 16:30:30.180+0000 INFO  Neo4j Server shutdown initiated by request
+2017-10-14 16:30:30.208+0000 INFO  Stopping...
+2017-10-14 16:30:30.261+0000 INFO  Stopped.
+2017-10-14 20:22:16.694+0000 INFO  ======== Neo4j 3.2.3 ========
+2017-10-14 20:22:16.737+0000 INFO  Starting...
+2017-10-14 20:22:17.814+0000 INFO  Bolt enabled on localhost:7472.
+2017-10-14 20:22:21.567+0000 INFO  Started.
+2017-10-14 20:22:22.482+0000 INFO  Remote interface available at http://localhost:7474/
+2017-10-31 22:00:31.799+0000 INFO  Neo4j Server shutdown initiated by request
+2017-10-31 22:00:31.940+0000 INFO  Stopping...
+2017-10-31 22:00:32.073+0000 INFO  Stopped.
