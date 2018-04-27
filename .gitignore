@@ -16,11 +16,12 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-# ignore uscode sections
-/uscode_sections/*
 
-# ignore 18.json
-/18.json
+# ignore uscode sections files
+public/uscode_sections/*
+
+# except the one file
+!public/uscode_sections/.gitkeep
 
 # ignore graph db data files?
-db/neo4j/development/data/*
+db/neo4j/development/*

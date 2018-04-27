@@ -42,6 +42,7 @@ GEM
     builder (3.2.3)
     byebug (10.0.2)
     coderay (1.1.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     erubis (2.7.0)
@@ -57,6 +58,8 @@ GEM
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
@@ -74,6 +77,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     neo4j (8.1.5)
       activemodel (>= 4.0)
@@ -89,10 +93,16 @@ GEM
       json
       multi_json
       typhoeus (>= 1.1.2)
+    neo4j-rake_tasks (0.7.18)
+      os
+      rake
+      ruby-progressbar
+      rubyzip (>= 1.1.7)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    os (1.0.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -128,6 +138,8 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rb-readline (0.5.5)
+    ruby-progressbar (1.9.0)
+    rubyzip (1.2.1)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -155,8 +167,12 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  colorize
+  httparty
   listen (~> 3.0.5)
   neo4j (~> 8.1.0)
+  neo4j-rake_tasks
+  nokogiri
   pry
   puma (~> 3.0)
   rails (~> 5.0.5)
