@@ -1,24 +1,37 @@
-# README
+# Getting Started
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Make sure neo4j is installed.
+```
+brew install neo4j
+neo4j start
+```
 
-Things you may want to cover:
+Setting up the project.
+```
+git clone https://github.com/dcordz/uscode_neo4j.git
+cd uscode_neo4j
+bundle install
+rake neo4j:install
+rake neo4j:start
 
-* Ruby version
+###### COUNT TO 10 WHILE NEO4JRB CONNECTS ######
 
-* System dependencies
+rake neo4j:migrate:all
+```
 
-* Configuration
+At this point if you get a connection error navigate to `http://localhost:7474`.
 
-* Database creation
+The initial username and password are both `neo4j`.
 
-* Database initialization
+Change the password to whatever you want, but make sure to update `development.rb` if you change the password to something other than `rails`.
 
-* How to run the test suite
+Once you've done the above:
+```
+rake neo4j:migrate:all
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Now navigate to http://uscode.house.gov/download/download.shtml and download an XML section of the US Code, put it in the directory `public/uscode_sections`.
 
-* Deployment instructions
+Run: `rake parse`
 
-* ...
+Depending on the how large the XML file is this could take some time.

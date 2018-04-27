@@ -143,14 +143,16 @@ task :parse => :environment do
   end
 
   $node_count = Node.count
-  dir = '/Users/dcordz/Personal-Projects/legisme/uscode_neo4j/uscode_sections'
+  dir = 'public/uscode_sections'
   files = Dir.open(dir)
   completed_files = %w(. .. .DS_Store)
+
   files.each_with_index do |file, i|
-    next if i < 55 # title is i - 6, so title 28 is i 34
+    next if completed_files.any?{ |f| f == file }
+    # next if i < 55 # title is i - 6, so title 28 is i 34
     puts "On File #{file}".colorize(:green)
     puts "Number of Nodes == #{$node_count}".colorize(:yellow)
-    next if completed_files.any?{ |f| f == file }
+
     path = "#{dir}/#{file}"
     # path = '/Users/david/Rails-Projects/uscode/uscode_sections/usc23.xml'
     f = File.open(path)

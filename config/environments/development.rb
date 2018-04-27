@@ -44,4 +44,6 @@ Rails.application.configure do
 
   # config.neo4j.session.type = :server_db
   # config.neo4j.session.url = 'http://localhost:7474'
+
+  ENV['NEO4J_PASSWORD'] = "rails"
 end

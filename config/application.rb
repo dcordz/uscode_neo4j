@@ -19,10 +19,14 @@ Bundler.require(*Rails.groups)
 
 module UscodeNeo4j
   class Application < Rails::Application
-    
+
     config.generators do |g|
       g.orm             :neo4j
     end
+
+    config.neo4j.session.type = :http
+    config.neo4j.session.url = "http://neo4j:#{ENV['NEO4J_PASSWORD']}@127.0.0.1:7474"
+    config.neo4j.session.options = {faraday_options: { ssl: { verify: true }}}
 
     # Configure where to connect to the Neo4j DB
     # Note that embedded db is only available for JRuby

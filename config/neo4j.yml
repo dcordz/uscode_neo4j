@@ -1,6 +1,5 @@
 development:
   type: http
   url: http://localhost:7474
-test:
-  type: http
-  url: http://localhost:7575
+  password: rails
+  user: neo4j
