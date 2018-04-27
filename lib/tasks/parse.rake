@@ -643,7 +643,7 @@ task :parse_us_code, [:file] => [:environment] do |t, args|
   # binding.pry
   file = File.read('18.json')
   f = JSON.parse(file)
-  # binding.pry
+  binding.pry
   ihash(f)
   # end
 
