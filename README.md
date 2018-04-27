@@ -6,6 +6,12 @@ brew install neo4j
 neo4j start
 ```
 
+It's also suggested that you be using a version of ruby > 2.4.2 due to this issue:
+https://github.com/puma/puma/issues/1421
+https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
+
+This project uses `ruby 2.5.1`
+
 ## Setting up the project
 ```
 git clone https://github.com/dcordz/uscode_neo4j.git
@@ -39,3 +45,18 @@ Depending on the how large the XML file is this could take some time.
 
 ## Neo4j visualizations
 Finally, open http://localhost:7474 in your browser, provide your credentials if needed, click the Database Stack icon at the top-left corner and then under `Node Labels` click `Node`.
+
+## Queries
+To play around with Neo4j and check out some queries you can use the rails console, `rails c`
+
+This article is informative: https://neo4jrb.readthedocs.io/en/9.1.x/Querying.html
+
+Basic queries you can run:
+```
+Node.first
+Node.last
+nodes = Node.where(num: "3")
+nodes.children
+nodes.children.first.parent
+nodes.children.first.parent.parent # until nil
+```

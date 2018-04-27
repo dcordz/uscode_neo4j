@@ -79,10 +79,10 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    neo4j (8.1.5)
+    neo4j (9.2.2)
       activemodel (>= 4.0)
       activesupport (>= 4.0)
-      neo4j-core (>= 7.0.0)
+      neo4j-core (>= 7.2.2)
       orm_adapter (~> 0.5.0)
     neo4j-core (8.1.4)
       activesupport (>= 4.0)
@@ -170,7 +170,7 @@ DEPENDENCIES
   colorize
   httparty
   listen (~> 3.0.5)
-  neo4j (~> 8.1.0)
+  neo4j
   neo4j-rake_tasks
   nokogiri
   pry
