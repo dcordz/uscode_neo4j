@@ -1,3 +1,11 @@
+# Introduction
+
+This project was created for two reasons, first, to learn a little bit about Neo4j, a popular graph database and second, to parse the US Code into smaller chunks.
+
+Each chunk of the US Code is separated into a "Node" and then related to any parent Nodes in the US Code. Frankly, the US Code has many pieces, paragraphs and subparagraph but these relationships are not always strict, for example paragraphs can have subclauses instead of, as you might think, only clauses having subclauses.
+
+This presented a challenge and the easy answer was to make every piece of the code a Node with generic parent-child relationship.
+
 # Getting Started
 
 Make sure neo4j is installed.
