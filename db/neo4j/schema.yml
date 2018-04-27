@@ -14,33 +14,7 @@
 :constraints:
 - CONSTRAINT ON ( `neo4j::migrations::schemamigration`:`Neo4j::Migrations::SchemaMigration`
   ) ASSERT `neo4j::migrations::schemamigration`.migration_id IS UNIQUE
-- CONSTRAINT ON ( chapter:Chapter ) ASSERT chapter.uuid IS UNIQUE
-- CONSTRAINT ON ( clause:Clause ) ASSERT clause.uuid IS UNIQUE
 - CONSTRAINT ON ( node:Node ) ASSERT node.uuid IS UNIQUE
-- CONSTRAINT ON ( part:Part ) ASSERT part.uuid IS UNIQUE
-- CONSTRAINT ON ( section:Section ) ASSERT section.uuid IS UNIQUE
-- CONSTRAINT ON ( sectionparagraph:SectionParagraph ) ASSERT sectionparagraph.uuid
-  IS UNIQUE
-- CONSTRAINT ON ( subclause:Subclause ) ASSERT subclause.uuid IS UNIQUE
-- CONSTRAINT ON ( subparagraph:Subparagraph ) ASSERT subparagraph.uuid IS UNIQUE
-- CONSTRAINT ON ( subsection:Subsection ) ASSERT subsection.uuid IS UNIQUE
-- CONSTRAINT ON ( subsectionparagraph:SubsectionParagraph ) ASSERT subsectionparagraph.uuid
-  IS UNIQUE
-- CONSTRAINT ON ( subtitle:Subtitle ) ASSERT subtitle.uuid IS UNIQUE
-- CONSTRAINT ON ( title:Title ) ASSERT title.uuid IS UNIQUE
 :indexes: []
 :versions:
-- '20170831193325'
-- '20170831195350'
-- '20170901000724'
-- '20170901003102'
-- '20170901003706'
-- '20170901012436'
-- '20170901012545'
-- '20170901012649'
-- '20170901012716'
-- '20170906004459'
-- '20170906005558'
-- '20170907024212'
-- '20170929200453'
-- '20171004195307'
+- '20180427194337'

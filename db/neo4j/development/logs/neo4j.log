@@ -1,124 +1,8 @@
-2017-09-07 02:34:21.069+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-09-07 02:34:21.185+0000 INFO  Starting...
-2017-09-07 02:34:23.571+0000 INFO  Bolt enabled on localhost:7472.
-2017-09-07 02:34:29.657+0000 INFO  Started.
-2017-09-07 02:34:31.863+0000 INFO  Remote interface available at http://localhost:7474/
-2017-09-07 02:57:30.888+0000 INFO  Neo4j Server shutdown initiated by request
-2017-09-07 02:57:30.906+0000 INFO  Stopping...
-2017-09-07 02:57:30.970+0000 INFO  Stopped.
-2017-09-29 19:58:46.838+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-09-29 19:58:46.965+0000 INFO  Starting...
-2017-09-29 19:58:48.813+0000 INFO  Bolt enabled on localhost:7472.
-2017-09-29 19:58:56.081+0000 INFO  Started.
-2017-09-29 19:58:59.392+0000 INFO  Remote interface available at http://localhost:7474/
-2017-09-29 20:39:56.191+0000 INFO  Transaction with id 5041 has been automatically rolled back due to transaction timeout.
-2017-09-29 21:52:44.939+0000 ERROR Failed to generate JSON output. Current context not an ARRAY but OBJECT
-org.codehaus.jackson.JsonGenerationException: Current context not an ARRAY but OBJECT
-	at org.codehaus.jackson.impl.JsonGeneratorBase._reportError(JsonGeneratorBase.java:480)
-	at org.codehaus.jackson.impl.Utf8Generator.writeEndArray(Utf8Generator.java:354)
-	at org.neo4j.server.rest.transactional.RestRepresentationWriter.write(RestRepresentationWriter.java:64)
-	at org.neo4j.server.rest.transactional.AggregatingWriter.write(AggregatingWriter.java:43)
-	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.lambda$writeRows$0(ExecutionResultSerializer.java:449)
-	at org.neo4j.cypher.internal.compatibility.v3_2.ExecutionResultWrapper$$anon$1.visit(ExecutionResultWrapper.scala:162)
-	at org.neo4j.cypher.internal.compiler.v3_2.helpers.RuntimeJavaValueConverter$feedIteratorToVisitable.accept(RuntimeJavaValueConverter.scala:55)
-	at org.neo4j.cypher.internal.compiler.v3_2.PipeExecutionResult.accept(PipeExecutionResult.scala:109)
-	at org.neo4j.cypher.internal.compatibility.v3_2.ExecutionResultWrapper.accept(ExecutionResultWrapper.scala:159)
-	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply$mcV$sp(ClosingExecutionResult.scala:169)
-	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply(ClosingExecutionResult.scala:168)
-	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult$$anonfun$accept$1.apply(ClosingExecutionResult.scala:168)
-	at org.neo4j.cypher.internal.compatibility.v3_2.exceptionHandler$runSafely$.apply(exceptionHandler.scala:90)
-	at org.neo4j.cypher.internal.compatibility.ClosingExecutionResult.accept(ClosingExecutionResult.scala:168)
-	at org.neo4j.cypher.internal.javacompat.ExecutionResult.accept(ExecutionResult.java:318)
-	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.writeRows(ExecutionResultSerializer.java:444)
-	at org.neo4j.server.rest.transactional.ExecutionResultSerializer.statementResult(ExecutionResultSerializer.java:112)
-	at org.neo4j.server.rest.transactional.TransactionHandle.executeStatements(TransactionHandle.java:324)
-	at org.neo4j.server.rest.transactional.TransactionHandle.commit(TransactionHandle.java:157)
-	at org.neo4j.server.rest.web.TransactionalService.lambda$executeStatementsAndCommit$1(TransactionalService.java:217)
-	at com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:71)
-	at com.sun.jersey.core.impl.provider.entity.StreamingOutputProvider.writeTo(StreamingOutputProvider.java:57)
-	at com.sun.jersey.spi.container.ContainerResponse.write(ContainerResponse.java:302)
-	at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1510)
-	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1419)
-	at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1409)
-	at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:409)
-	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:558)
-	at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:733)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1669)
-	at org.neo4j.server.rest.dbms.AuthorizationDisabledFilter.doFilter(AuthorizationDisabledFilter.java:49)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
-	at org.neo4j.server.rest.web.CollectUserAgentFilter.doFilter(CollectUserAgentFilter.java:69)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1652)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:221)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerList.handle(HandlerList.java:52)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:497)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:540)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
-	at java.lang.Thread.run(Thread.java:745)
-2017-09-29 21:52:44.947+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
-2017-09-29 21:52:44.963+0000 ERROR Unable to reply to request, because the client has closed the connection (Broken pipe).
-2017-10-04 19:49:42.394+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-04 19:49:42.427+0000 INFO  Starting...
-2017-10-04 19:49:43.207+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-04 19:49:45.269+0000 INFO  Started.
-2017-10-04 19:49:46.015+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-04 19:50:42.213+0000 INFO  Neo4j Server shutdown initiated by request
-2017-10-04 19:50:42.225+0000 INFO  Stopping...
-2017-10-04 19:50:42.244+0000 INFO  Stopped.
-2017-10-04 19:52:58.163+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-04 19:52:58.188+0000 INFO  Starting...
-2017-10-04 19:52:58.808+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-04 19:53:00.472+0000 INFO  Started.
-2017-10-04 19:53:01.226+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-04 19:57:00.496+0000 INFO  Transaction with id 8668 has been automatically rolled back due to transaction timeout.
-2017-10-06 13:51:28.651+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-06 13:51:28.701+0000 INFO  Starting...
-2017-10-06 13:51:29.622+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-06 13:51:33.512+0000 INFO  Started.
-2017-10-06 13:51:34.395+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-07 06:51:36.361+0000 INFO  Neo4j Server shutdown initiated by request
-2017-10-07 06:51:36.384+0000 INFO  Stopping...
-2017-10-07 06:51:36.416+0000 INFO  Stopped.
-2017-10-07 18:12:13.305+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-07 18:12:13.352+0000 INFO  Starting...
-2017-10-07 18:12:19.283+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-07 18:12:27.711+0000 INFO  Started.
-2017-10-07 18:12:28.628+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-10 14:45:10.185+0000 INFO  Neo4j Server shutdown initiated by request
-2017-10-10 14:45:10.199+0000 INFO  Stopping...
-2017-10-10 14:45:10.239+0000 INFO  Stopped.
-2017-10-11 21:31:43.552+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-11 21:31:43.601+0000 INFO  Starting...
-2017-10-11 21:31:49.523+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-11 21:31:58.415+0000 INFO  Started.
-2017-10-11 21:31:59.396+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-14 16:30:30.180+0000 INFO  Neo4j Server shutdown initiated by request
-2017-10-14 16:30:30.208+0000 INFO  Stopping...
-2017-10-14 16:30:30.261+0000 INFO  Stopped.
-2017-10-14 20:22:16.694+0000 INFO  ======== Neo4j 3.2.3 ========
-2017-10-14 20:22:16.737+0000 INFO  Starting...
-2017-10-14 20:22:17.814+0000 INFO  Bolt enabled on localhost:7472.
-2017-10-14 20:22:21.567+0000 INFO  Started.
-2017-10-14 20:22:22.482+0000 INFO  Remote interface available at http://localhost:7474/
-2017-10-31 22:00:31.799+0000 INFO  Neo4j Server shutdown initiated by request
-2017-10-31 22:00:31.940+0000 INFO  Stopping...
-2017-10-31 22:00:32.073+0000 INFO  Stopped.
-2018-04-27 19:11:52.923+0000 INFO  ======== Neo4j 3.2.3 ========
-2018-04-27 19:11:52.956+0000 INFO  Starting...
-2018-04-27 19:11:53.593+0000 INFO  Bolt enabled on localhost:7472.
-2018-04-27 19:11:55.990+0000 INFO  Started.
-2018-04-27 19:11:57.034+0000 WARN  FAILED ServerConnector@34a331bc{HTTP/1.1}{localhost:7474}: java.net.BindException: Address already in use Address already in use
+2018-04-27 19:42:50.456+0000 INFO  ======== Neo4j 3.3.5 ========
+2018-04-27 19:42:50.490+0000 INFO  Starting...
+2018-04-27 19:42:51.634+0000 INFO  Bolt enabled on localhost:7472.
+2018-04-27 19:42:54.472+0000 INFO  Started.
+2018-04-27 19:42:55.269+0000 WARN  FAILED ServerConnector@703e5614{HTTP/1.1}{localhost:7474}: java.net.BindException: Address already in use Address already in use
 java.net.BindException: Address already in use
 	at sun.nio.ch.Net.bind0(Native Method)
 	at sun.nio.ch.Net.bind(Net.java:433)
@@ -131,18 +15,18 @@ java.net.BindException: Address already in use
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
 	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
-	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:363)
-	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:178)
-	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:319)
-	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:99)
-	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:510)
-	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:434)
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:339)
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:154)
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:321)
+	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:102)
+	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:541)
+	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:445)
 	at org.neo4j.kernel.lifecycle.LifeSupport.start(LifeSupport.java:107)
-	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:207)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:107)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:80)
-	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:28)
-2018-04-27 19:11:57.035+0000 WARN  FAILED org.eclipse.jetty.server.Server@138f73a7: java.net.BindException: Address already in use Address already in use
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:212)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:111)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:79)
+	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:32)
+2018-04-27 19:42:55.269+0000 WARN  FAILED org.eclipse.jetty.server.Server@44e3f3e5: java.net.BindException: Address already in use Address already in use
 java.net.BindException: Address already in use
 	at sun.nio.ch.Net.bind0(Native Method)
 	at sun.nio.ch.Net.bind(Net.java:433)
@@ -155,31 +39,31 @@ java.net.BindException: Address already in use
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
 	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
-	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:363)
-	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:178)
-	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:319)
-	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:99)
-	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:510)
-	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:434)
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:339)
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:154)
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:321)
+	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:102)
+	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:541)
+	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:445)
 	at org.neo4j.kernel.lifecycle.LifeSupport.start(LifeSupport.java:107)
-	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:207)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:107)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:80)
-	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:28)
-2018-04-27 19:11:57.036+0000 ERROR Failed to start Neo4j on localhost:7474: Address localhost:7474 is already in use, cannot bind to it.
-2018-04-27 19:11:57.036+0000 INFO  Stopping...
-2018-04-27 19:11:57.074+0000 INFO  Stopped.
-2018-04-27 19:11:57.077+0000 ERROR Failed to start Neo4j: Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@738a9e35' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.". Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@738a9e35' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
-org.neo4j.server.ServerStartupException: Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@738a9e35' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:212)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:111)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:79)
+	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:32)
+2018-04-27 19:42:55.270+0000 ERROR Failed to start Neo4j on localhost:7474: Address localhost:7474 is already in use, cannot bind to it.
+2018-04-27 19:42:55.279+0000 INFO  Stopping...
+2018-04-27 19:42:55.306+0000 INFO  Stopped.
+2018-04-27 19:42:55.308+0000 ERROR Failed to start Neo4j: Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@593354fa' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.". Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@593354fa' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
+org.neo4j.server.ServerStartupException: Starting Neo4j failed: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@593354fa' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
 	at org.neo4j.server.exception.ServerStartupErrors.translateToServerStartupError(ServerStartupErrors.java:68)
-	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:215)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:107)
-	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:80)
-	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:28)
-Caused by: org.neo4j.kernel.lifecycle.LifecycleException: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@738a9e35' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
-	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:444)
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:220)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:111)
+	at org.neo4j.server.ServerBootstrapper.start(ServerBootstrapper.java:79)
+	at org.neo4j.server.CommunityEntryPoint.main(CommunityEntryPoint.java:32)
+Caused by: org.neo4j.kernel.lifecycle.LifecycleException: Component 'org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter@593354fa' was successfully initialized, but failed to start. Please see the attached cause exception "Address localhost:7474 is already in use, cannot bind to it.".
+	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:466)
 	at org.neo4j.kernel.lifecycle.LifeSupport.start(LifeSupport.java:107)
-	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:207)
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:212)
 	... 3 more
 Caused by: org.neo4j.helpers.PortBindException: Address localhost:7474 is already in use, cannot bind to it.
 	at sun.nio.ch.Net.bind0(Native Method)
@@ -193,11 +77,11 @@ Caused by: org.neo4j.helpers.PortBindException: Address localhost:7474 is alread
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
 	at org.eclipse.jetty.server.Server.doStart(Server.java:366)
 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
-	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:363)
-	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:178)
-	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:319)
-	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:99)
-	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:510)
-	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:434)
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:339)
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:154)
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:321)
+	at org.neo4j.server.AbstractNeoServer.access$700(AbstractNeoServer.java:102)
+	at org.neo4j.server.AbstractNeoServer$ServerComponentsLifecycleAdapter.start(AbstractNeoServer.java:541)
+	at org.neo4j.kernel.lifecycle.LifeSupport$LifecycleInstance.start(LifeSupport.java:445)
 	... 5 more
-2018-04-27 19:11:57.077+0000 INFO  Neo4j Server shutdown initiated by request
+2018-04-27 19:42:55.309+0000 INFO  Neo4j Server shutdown initiated by request
